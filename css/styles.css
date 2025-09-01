@@ -3488,7 +3488,7 @@ img.u-pull-left {
     text-align: center;
     flex: 1 1 calc(33% - 20px);  /* 3 cards per row with gap */
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.2s ease-in-out;
     min-width: 220px;  /* prevents too small cards on very small screens */
     font-family: var(--font-1); /* ensure text uses Public Sans */
 }
@@ -3518,16 +3518,17 @@ img.u-pull-left {
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
-/* responsive for tablets and mobiles */
-@media (max-width: 992px) {
-    .skill-card {
-        flex: 1 1 calc(50% - 20px);
+/* Tablet view (2 columns) */
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 600px) {
-    .skill-card {
-        flex: 1 1 100%;
+/* Mobile view (1 column) */
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 }
 /* --------------------------------------------------------------------
@@ -4077,36 +4078,16 @@ img.u-pull-left {
 }
 
 @media screen and (max-width: 400px) {
-    .folio-list .column {
-        flex  : none;
-        width : 50%;
+    .folio-list {
+        --item-min-height : var(--vspace-3_5);
     }
 
     .folio-list__item {
-        margin-bottom : 0;
+        margin-bottom : var(--vspace-0_75);
     }
 
     .folio-list__item-link {
-        padding-left : 0;
-    }
-
-    .folio-list__item-pic {
-        position : static;
-    }
-
-    .folio-list__item-pic img {
-        max-width : 100%;
-        width     : 100%;
-        height    : auto;
-    }
-
-    .folio-list__item-text,
-    .folio-list__proj-link {
-        display : none;
-    }
-
-    .modal-popup__desc {
-        padding : 0 var(--vspace-1) var(--vspace-0_25);
+        padding-left : calc(4.25 * var(--space));
     }
 }
 
@@ -4236,6 +4217,7 @@ img.u-pull-left {
     margin-top   : calc(var(--vspace-0_25) * -1);
     margin-right : 5.2rem;
     line-height  : var(--vspace-0_875);
+    white-space: nowrap;        
 }
 
 .ss-copyright span {
@@ -4252,6 +4234,11 @@ img.u-pull-left {
 
 .ss-copyright span:last-child::after {
     display : none;
+}
+
+.ss-copyright p {
+    margin: 0;                  /* remove extra spacing */
+    font-size: var(--text-sm);
 }
 
 /* ------------------------------------------------------------------- 
@@ -4304,7 +4291,7 @@ img.u-pull-left {
  * ------------------------------------------------------------------- */
 @media screen and (max-width: 600px) {
     .ss-copyright span {
-        display : block;
+        display : inline;
     }
 
     .ss-copyright span::after {
